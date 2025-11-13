@@ -1,18 +1,23 @@
-/* 1️⃣ Reset και γενικές ρυθμίσεις */
-* {
+/* =========================================================
+   1️⃣ Reset & Βασικές ρυθμίσεις
+   ========================================================= */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  --header-height: 72px;     /* αρχικό */
-  --header-min-height: 62px; /* μετά το scroll (πολύ μικρή διαφορά) */
+  --header-height: 72px;      /* αρχικό */
+  --header-min-height: 62px;  /* μετά το scroll */
 }
 
-
 html {
-  scroll-behavior: smooth; /* κάνει το scroll να είναι “ομαλό” */
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -22,17 +27,13 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-}
-
-html, body {
   max-width: 100%;
   overflow-x: hidden !important;
 }
 
-
-/* 2️⃣ Navigation bar */
-
+/* =========================================================
+   2️⃣ Header & Navigation
+   ========================================================= */
 
 /* Navbar αρχικά διάφανο */
 header {
@@ -47,38 +48,35 @@ header {
   z-index: 1000;
 }
 
-/* Όταν κάνεις scroll  */
+/* Όταν κάνεις scroll */
 header.scrolled {
   height: var(--header-min-height);
   line-height: var(--header-min-height);
-  background: white;
+  background: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   padding: 0.5rem 0;
 }
 
-
-
 .navbar {
-    height: 100%;
-    display: flex;
-    justify-content: space-between; /* logo αριστερά, links δεξιά */
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
-    padding: 1rem 2rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between; /* logo αριστερά, links δεξιά */
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 2rem;
 }
 
 .logo {
   font-size: 1.2rem;
   font-weight: 700;
-  color: white; /* βαθύ μπλε */
+  color: #ffffff;
 }
 
 /* Logo όταν κάνουμε scroll */
 header.scrolled .logo {
   color: #0b3954;
 }
-
 
 .nav-links {
   list-style: none;
@@ -88,16 +86,16 @@ header.scrolled .logo {
 
 .nav-links a {
   text-decoration: none;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
-  transition: font-size 0.25s, color 0.25s;
   font-size: 0.95rem;
+  transition: font-size 0.25s, color 0.25s;
 }
 
 /* Links όταν κάνουμε scroll */
 header.scrolled .nav-links a {
-    position: relative;
-    font-size: 0.9rem;
+  position: relative;
+  font-size: 0.9rem;
   color: #0b3954;
 }
 
@@ -116,128 +114,79 @@ header.scrolled .nav-links a:hover::after {
   width: 100%;
 }
 
-
 .nav-links a:hover {
-  color: #0b3954; /* αλλάζει χρώμα στο hover */
+  color: #0b3954;
 }
 
 header.scrolled .nav-links a:hover {
   color: #072f47; /* λίγο πιο σκούρο μπλε */
 }
 
+/* =========================================================
+   3️⃣ Hero section
+   ========================================================= */
 
-
-/* 3️⃣ Hero section */
 .hero {
-  width: 100%;                /* Πιάνει όλο το πλάτος */
-  max-width: 100%;            /* Αφαιρεί τον περιορισμό από .section */
-  height: 100vh;              /* Πιάνει όλο το ύψος της οθόνης */
-  margin: 0;                  /* Καμία περιθώριο γύρω γύρω */
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  margin: 0;
   padding: 0;
-
   background: url("../images/truck.jpg") center center / cover no-repeat;
-  background-attachment: fixed;  /* “Parallax” εφέ στα desktop */
-  
+  background-attachment: fixed; /* Parallax στα desktop */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
-  overflow: hidden;           /* Αποτρέπει να φανούν άσπρες άκρες σε μικρές οθόνες */
+  overflow: hidden; /* αποτρέπει άσπρες άκρες σε μικρές οθόνες */
 }
-
-@media (max-width: 768px) {
-  .hero {
-    background-attachment: scroll; /* απενεργοποιεί το parallax στα κινητά */
-    .hero-content { padding: 0.8rem 1rem; };
-    .hero .subhead { line-height: 1.6; };
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll !important;
-    height: 85vh; /* μικραίνουμε λίγο το ύψος */
-  }
-
-  .hero-content {
-    padding: 0 10px;
-    width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-
-  .subhead {
-    font-size: 0.9rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .section {
-    padding: 70px 14px;
-    max-width: 100% !important;
-  }
-}
-
 
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,.42),
-    rgba(0,0,0,.58)
+    rgba(0, 0, 0, 0.42),
+    rgba(0, 0, 0, 0.58)
   );
 }
 
 .hero-content {
-  
   position: relative;
   z-index: 1;
-  color: #fff;
+  color: #ffffff;
   max-width: 920px;
   padding: 1.2rem 1.4rem;
   text-align: center;
-  position: relative;
 }
 
 .hero h1 {
-  /* responsive μέγεθος τίτλου */
   font-size: clamp(28px, 4.6vw, 54px);
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 700;
   margin-bottom: 0.8rem;
-  color: #fff;
+  color: #ffffff;
   text-shadow:
-    2px 2px 6px rgba(0,0,0,0.4),
-    -2px -2px 6px rgba(0,0,0,0.3);
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    -2px -2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .hero .subhead {
   font-size: clamp(14px, 1.35vw, 18px);
   line-height: 1.7;
   font-weight: 400;
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   margin: 0 auto 1.6rem auto;
-  text-wrap: balance; /* όπου υποστηρίζεται εξομαλύνει τα σπασίματα γραμμής */
-  text-shadow: 0 1px 6px rgba(0,0,0,.35);
+  text-wrap: balance;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
-
 .hero .accent {
-  color: #ffeb3b;               /* καθαρή έμφαση πάνω στο σκοτεινό overlay */
-  text-shadow: 0 2px 10px rgba(0,0,0,.4);
+  color: #ffeb3b;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .hero p {
@@ -249,34 +198,36 @@ header.scrolled .nav-links a:hover {
 .btn {
   display: inline-block;
   background: #0b3954;
-  color: #fff;
+  color: #ffffff;
   padding: 0.9rem 1.6rem;
   border-radius: 50px;
   text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
   font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
-    
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s, transform 0.3s;
 }
 
 .btn:hover {
   background: #092c41;
-  transform: scale(1.05); /* μικρό “zoom” στο hover */
+  transform: scale(1.05);
 }
 
-/* 4️⃣ Γενικά sections */
-.section {
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: auto;
-  
-}
+/* =========================================================
+   4️⃣ Γενικά sections
+   ========================================================= */
 
 section {
   scroll-margin-top: 120px;
 }
 
+.section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: auto;
+  opacity: 0;                 /* για τα scroll animations */
+  transition: all 0.8s ease-out;
+}
 
 /* Η Αρχική (hero) να πιάνει 100% πλάτος */
 .hero.section {
@@ -292,15 +243,16 @@ section {
   color: #0b3954;
 }
 
+/* =========================================================
+   5️⃣ Σχετικά με εμάς (About)
+   ========================================================= */
 
-/* ============ ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ ============ */
-
-/* Ειδικά για το section που έχει ΚΑΙ class "section" ΚΑΙ "about-section" */
+/* Section με class "section" ΚΑΙ "about-section" */
 .section.about-section {
   width: 100%;
-  max-width: 100%;                             /* ακυρώνει το 1200px */
-  margin: 0;                                   /* χωρίς κεντράρισμα κουτιού */
-  padding: 120px clamp(16px, 6vw, 80px);       /* πάνω/κάτω 120, πλάγια responsive */
+  max-width: 100%;
+  margin: 0;
+  padding: 120px clamp(16px, 6vw, 80px);
   background: #f7f9fc;
   position: relative;
 }
@@ -325,13 +277,13 @@ section {
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #888;
+  color: #888888;
   margin-bottom: 1.4rem;
 }
 
 .about-hero-text p {
   font-size: 1rem;
-  color: #444;
+  color: #444444;
   margin-bottom: 0.8rem;
 }
 
@@ -361,7 +313,7 @@ section {
 .about-hero-image img {
   width: 100%;
   border-radius: 18px;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
   object-fit: cover;
 }
 
@@ -386,16 +338,19 @@ section {
   background: #f5f8fb;
   border-radius: 16px;
   padding: 1rem 1.1rem;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
   background: #ffffff;
 }
 
@@ -414,25 +369,23 @@ section {
 
 .stat-desc {
   font-size: 0.82rem;
-  color: #555;
+  color: #555555;
 }
 
 /* Δεξιά στήλη – κάρτα χάρτη */
 .about-map-card {
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.16);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
   position: relative;
   background: none;
 }
-
 
 .about-map-card img {
   width: 100%;
   height: auto;
   display: block;
 }
-
 
 .about-map-caption {
   position: absolute;
@@ -442,12 +395,11 @@ section {
   padding: 1rem 1.4rem;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.55) 0%,
-    rgba(0,0,0,0.00) 100%
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 100%
   );
-  color: #fff;
+  color: #ffffff;
 }
-
 
 .about-map-caption h3 {
   margin-bottom: 0.4rem;
@@ -457,10 +409,10 @@ section {
 .about-map-caption p {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255, 255, 255, 0.92);
 }
 
-/* Gallery με 2 φωτογραφίες κάτω (αν την χρησιμοποιείς ήδη) */
+/* Gallery με 2 φωτογραφίες κάτω */
 .about-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -471,7 +423,7 @@ section {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
   transform: translateY(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -486,8 +438,12 @@ section {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.05));
-  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.05)
+  );
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -501,46 +457,17 @@ section {
 
 .gallery-overlay p {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .gallery-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .about-hero-row {
-    grid-template-columns: 1fr;
-  }
-
-  .about-stats-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .about-map-card img {
-    height: 220px;
-  }
-
-  .about-hero-image img {
-    width: 100% !important;
-    height: auto !important;
-  }
-}
-
-@media (max-width: 768px) {
- .section.about-section {
-    padding: 90px clamp(16px, 6vw, 40px);
-  }
-
-  .about-hero-text h2 {
-    text-align: center;
-  }
-}
-
-
-/* ============ ΕΠΙΚΟΙΝΩΝΙΑ ============ */
+/* =========================================================
+   6️⃣ Επικοινωνία
+   ========================================================= */
 
 .contact-section h2 {
   margin-bottom: 2rem;
@@ -562,7 +489,7 @@ section {
 
 .contact-intro {
   font-size: 0.98rem;
-  color: #555;
+  color: #555555;
 }
 
 .contact-item {
@@ -576,7 +503,7 @@ section {
   height: 36px;
   border-radius: 50%;
   background: #0b3954;
-  color: #fff;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -592,14 +519,14 @@ section {
 
 .contact-item p {
   font-size: 0.95rem;
-  color: #444;
+  color: #444444;
 }
 
 /* Δεξιά στήλη – κάρτα χάρτη */
 .contact-map-card {
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
   background: #e3edf5;
   height: 100%;
 }
@@ -611,18 +538,9 @@ section {
   display: block;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-map-card {
-    height: 280px;
-  }
-}
-
-/* ============ ΓΕΜΗ ============ */
+/* =========================================================
+   7️⃣ ΓΕΜΗ
+   ========================================================= */
 
 .gemi-section {
   max-width: 1200px;
@@ -637,7 +555,7 @@ section {
 
 .gemi-intro {
   margin-bottom: 1.5rem;
-  color: #555;
+  color: #555555;
   font-size: 0.96rem;
 }
 
@@ -694,19 +612,19 @@ section {
   text-align: left;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #444;
+  color: #444444;
   background: #f7f9fc;
 }
 
 .gemi-table td {
-  color: #333;
+  color: #333333;
 }
 
 /* Πίνακες με κεφαλίδες (εταίροι / ΚΑΔ) */
 .gemi-table-partners thead th,
 .gemi-table-activities thead th {
   background: #0b3954;
-  color: #fff;
+  color: #ffffff;
   font-size: 0.9rem;
 }
 
@@ -723,46 +641,20 @@ section {
 .gemi-note {
   margin-top: 0.8rem;
   font-size: 0.84rem;
-  color: #777;
+  color: #777777;
 }
 
+/* =========================================================
+   8️⃣ Scroll Animations
+   ========================================================= */
 
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  .gemi-section {
-    padding-top: 90px;
-    padding-bottom: 90px;
-  }
-
-  .gemi-card {
-    padding: 1.2rem 1.3rem;
-  }
-
-  .gemi-table th,
-  .gemi-table td {
-    padding: 0.45rem 0.45rem;
-    font-size: 0.88rem;
-  }
-}
-
-
-
-
-/* 5️⃣ Animations κατά το scroll */
-
-/* Όλα τα sections ξεκινούν “κρυμμένα” */
-.section {
-  opacity: 0;
-  transition: all 0.8s ease-out;
-}
-
-/* ===== Smooth Fade Up ===== */
+/* Fade Up */
 .fade-up {
   opacity: 0;
   transform: translateY(140px);
-  transition: transform 1.6s cubic-bezier(.16,.84,.44,1), opacity 1.4s ease;
+  transition:
+    transform 1.6s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
 }
 
 .fade-up.show {
@@ -770,12 +662,13 @@ section {
   transform: translateY(0);
 }
 
-/* ===== Smooth Fade Down ===== */
-
+/* Fade Down */
 .fade-down {
   opacity: 0;
   transform: translateY(-140px);
-  transition: transform 1.6s cubic-bezier(.16,.84,.44,1), opacity 1.4s ease;
+  transition:
+    transform 1.6s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
 }
 
 .fade-down.show {
@@ -783,22 +676,27 @@ section {
   transform: translateY(0);
 }
 
-/* ===== Smooth From Left ===== */
+/* From Left */
 .fade-left {
   opacity: 0;
   transform: translateX(-140px);
-  transition: transform 1.7s cubic-bezier(.16,.84,.44,1), opacity 1.4s ease;
+  transition:
+    transform 1.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
 }
+
 .fade-left.show {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* ===== Smooth From Right ===== */
+/* From Right */
 .fade-right {
   opacity: 0;
   transform: translateX(140px);
-  transition: transform 1.7s cubic-bezier(.16,.84,.44,1), opacity 1.4s ease;
+  transition:
+    transform 1.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
 }
 
 .fade-right.show {
@@ -806,29 +704,20 @@ section {
   transform: translateX(0);
 }
 
-/* ============ MOBILE MENU ============ */
+/* =========================================================
+   9️⃣ Mobile Menu / Hamburger
+   ========================================================= */
 
 .mobile-menu-btn {
   display: none;
   font-size: 2rem;
   cursor: pointer;
-  color: white;
+  color: #ffffff;
 }
 
 /* Όταν γίνει scroll αλλάζει χρώμα */
 header.scrolled .mobile-menu-btn {
   color: #0b3954;
-}
-
-/* Κρύβουμε το desktop menu σε κινητά και δείχνουμε hamburger */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-  }
 }
 
 /* Slide-in menu */
@@ -838,16 +727,16 @@ header.scrolled .mobile-menu-btn {
   right: -100%;
   width: 75%;
   height: 100vh;
-   background: rgba(50, 50, 50, 0.45); /* ΔΙΑΦΑΝΟ ΓΚΡΙ */
-  backdrop-filter: blur(8px);        /* Θόλωμα */
+  background: rgba(50, 50, 50, 0.45); /* διάφανο γκρι */
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: white;
+  color: #ffffff;
   padding: 1.6rem;
   z-index: 2000;
-  transition: right 0.35s ease;
   display: flex;
   flex-direction: column;
-  box-shadow: -4px 0 18px rgba(0,0,0,0.25);
+  box-shadow: -4px 0 18px rgba(0, 0, 0, 0.25);
+  transition: right 0.35s ease;
 }
 
 .mobile-menu.open {
@@ -866,7 +755,7 @@ header.scrolled .mobile-menu-btn {
 .mobile-menu-header button {
   background: none;
   border: none;
-  color: white;
+  color: #ffffff;
   font-size: 2rem;
   cursor: pointer;
 }
@@ -878,11 +767,11 @@ header.scrolled .mobile-menu-btn {
 }
 
 .mobile-menu-links a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   font-size: 1.1rem;
   padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   transition: opacity 0.2s ease;
 }
 
@@ -890,16 +779,15 @@ header.scrolled .mobile-menu-btn {
   opacity: 0.7;
 }
 
-
-
-
-
+/* =========================================================
+   🔟 Footer
+   ========================================================= */
 
 .footer {
   width: 100%;
-  background: #0b3954; /* σκούρο μπλε */
-  padding: 1.2rem 0;   /* ίδια αίσθηση ύψους με το navbar */
-  margin-top: 80px;    /* απόσταση από το GEMI ώστε να μην κολλάει */
+  background: #0b3954;
+  padding: 1.2rem 0;
+  margin-top: 80px; /* απόσταση από το GEMI ώστε να μην κολλάει */
 }
 
 .footer-content {
@@ -907,8 +795,117 @@ header.scrolled .mobile-menu-btn {
   margin: 0 auto;
   text-align: center;
   font-size: 0.95rem;
-  color: #ffffff; /* λευκά γράμματα */
+  color: #ffffff;
   letter-spacing: 0.5px;
 }
 
+/* =========================================================
+   1️⃣1️⃣ Media Queries (Responsiveness)
+   ========================================================= */
 
+/* Hero & section σε tablets */
+@media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll; /* απενεργοποιεί το parallax στα κινητά */
+  }
+
+  .hero-content {
+    padding: 0.8rem 1rem;
+  }
+
+  .hero .subhead {
+    line-height: 1.6;
+  }
+
+  .section.about-section {
+    padding: 90px clamp(16px, 6vw, 40px);
+  }
+
+  .about-hero-text h2 {
+    text-align: center;
+  }
+
+  .gemi-section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .gemi-card {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .gemi-table th,
+  .gemi-table td {
+    padding: 0.45rem 0.45rem;
+    font-size: 0.88rem;
+  }
+
+  /* Mobile navigation: κρύβουμε τα desktop links */
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* Hero & section σε μικρές συσκευές */
+@media (max-width: 480px) {
+  .hero {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll !important;
+    height: 85vh;
+  }
+
+  .hero-content {
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .subhead {
+    font-size: 0.9rem;
+  }
+
+  .section {
+    padding: 70px 14px;
+    max-width: 100% !important;
+  }
+}
+
+/* About σε μεσαία breakpoints */
+@media (max-width: 992px) {
+  .about-hero-row {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-map-card img {
+    height: 220px;
+  }
+
+  .about-hero-image img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Contact */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map-card {
+    height: 280px;
+  }
+}
