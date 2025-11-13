@@ -25,6 +25,12 @@ body {
   overflow-x: hidden;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+
 /* 2️⃣ Navigation bar */
 
 
@@ -147,6 +153,38 @@ header.scrolled .nav-links a:hover {
     .hero .subhead { line-height: 1.6; };
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll !important;
+    height: 85vh; /* μικραίνουμε λίγο το ύψος */
+  }
+
+  .hero-content {
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .subhead {
+    font-size: 0.9rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .section {
+    padding: 70px 14px;
+    max-width: 100% !important;
+  }
+}
+
 
 .hero::before {
   content: "";
@@ -484,6 +522,11 @@ section {
   .about-map-card img {
     height: 220px;
   }
+
+  .about-hero-image img {
+    width: 100% !important;
+    height: auto !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -621,9 +664,22 @@ section {
 
 /* Πίνακες */
 .gemi-table {
+  min-width: 600px; /* έτσι δεν σπάει η μορφή του πίνακα */
+}
+
+.table-responsive {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.93rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #c7d4e0;
+  border-radius: 10px;
 }
 
 .gemi-table th,
@@ -669,6 +725,9 @@ section {
   font-size: 0.84rem;
   color: #777;
 }
+
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
