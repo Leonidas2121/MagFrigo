@@ -3,7 +3,7 @@ name: Deploy to Plesk via FTP
 on:
   push:
     branches:
-      - main   # αν το κλαδί σου λέγεται αλλιώς (π.χ. master), άλλαξέ το εδώ
+      - main
 
 jobs:
   ftp-deploy:
